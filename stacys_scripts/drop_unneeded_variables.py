@@ -7,7 +7,6 @@ import csv
 flin=sys.argv[1]
 flout=sys.argv[2]
 
-#
 def unfussy_reader(csv_reader):
    while True:
       try:
@@ -20,13 +19,17 @@ def unfussy_reader(csv_reader):
 # START
 with open(flin, 'r') as fin, open(flout, 'w', newline='') as fout:
     # define reader and writer objects
-    reader = unfussy_reader(csv.reader(fin, skipinitialspace=True))
+    reader = csv.reader(fin, skipinitialspace=True)
+    # reader = unfussy_reader(reader)
     writer = csv.writer(fout, delimiter=',')
     # write headers
     writer.writerow(next(reader))
     # iterate and write rows based on condition
-    for i in reader:
-          if i[4] == 'concentration' or i[4] == 'temperature' or i[3] == 'current' or i[3]=='audio': 
-              writer.writerow(i)
+    try:
+        for i in reader:
+              if i[4] == 'concentration' or i[4] == 'temperature' or i[3] == 'current' or i[3]=='audio':
+                  writer.writerow(i)
+    except Exception as e:
+        print(e)
 
 
