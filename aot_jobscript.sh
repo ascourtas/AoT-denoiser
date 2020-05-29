@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -A b1045               # Allocation
-#SBATCH -b buyin                # Queue
+#SBATCH -p buyin                # Queue
 #SBATCH -t 04:00:00             # Walltime/duration of the job
 #SBATCH -N 1                    # Number of Nodes
 #SBATCH --mem=18G               # Memory per node in GB needed for a job. Also see --mem-per-cpu
