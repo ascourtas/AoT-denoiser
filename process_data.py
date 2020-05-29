@@ -20,10 +20,11 @@ def reformat_data(df):
         pass
 
 # resource: https://towardsdatascience.com/5-ways-to-detect-outliers-that-every-data-scientist-should-know-python-code-70a54335a623
-def sd_analysis(values):
+# TODO: pass whole df in instead
+def sd_analysis(df):
     # Set upper and lower limit to 3 standard deviation
-    data_std = values.std()
-    data_mean = values.mean()
+    data_std = df["value_hrf"].std()
+    data_mean = df["value_hrf"].mean()
     anomaly_cut_off = data_std * 3
 
     lower_limit = data_mean - anomaly_cut_off
@@ -31,12 +32,12 @@ def sd_analysis(values):
     print(lower_limit)
 
     # find outliers
-    out_series = values.loc[(values > upper_limit) | (values < lower_limit)]
-    return out_series
+    out_df = df.loc[(df["value_hrf"] > upper_limit) | (df["value_hrf"] < lower_limit)]
+    return out_df
 
 # take in just a CO df
 def detect_anomalies(df):
-    sd_analysis(df["value_hrf"])
+    return sd_analysis(df)
 
 
 
@@ -50,7 +51,8 @@ def main():
     path_weekly_co = "data/weekly_april_08_to_14_co_data.csv"
     co_df = pd.read_csv(path_weekly_co)
     print(co_df.head())
-    detect_anomalies(co_df)
+    anom_df = detect_anomalies(co_df)
+    anom_df.to_csv("data/weekly_april_08_to_14_co_data_anomalies.csv")
     # co_df.to_csv("data/monthly_april_2019_reduced_co_data.csv")
     # co_df.to_csv("data/weekly_april_08_to_14_co_data.csv")
 
