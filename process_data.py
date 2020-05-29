@@ -47,6 +47,7 @@ def detect_anomalies(df):
 
 
 def main():
+    print("at top of process data script")
     path_monthly = "data/chicago-complete.monthly.2019-04-01-to-2019-04-30/chicago-complete.monthly.2019-04-01-to-2019-04-30_reduced_data_30m/data.csv"
     path_weekly = "data/chicago-complete.weekly.2020-04-08-to-2020-04-14/weekly_April_08_to_14_data_drop.csv"
     path_quest = "../AoT_Chicago.complete.2019-06-10.from-2018-05-01-to-2018-10-30/data.csv"  # run from /AoT/AoT-denoiser folder
